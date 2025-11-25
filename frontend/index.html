@@ -13,69 +13,83 @@
 <body>
     <!-- Header -->
     <!-- En el header, reemplaza la sección del nav-auth -->
-<header class="header">
-    <nav class="nav">
-        <div class="nav-brand">
-            <div class="logo">
-                <i class="fas fa-paw"></i>
-            </div>
-            <span>Huellitas & Burbujas</span>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#tienda">Tienda</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li class="nav-auth" id="navAuth">
-                <!-- Estado cuando NO está logueado -->
-                <div class="auth-buttons" id="authButtons">
-                    <a href="login.html" class="btn btn-outline">
-                        <i class="fas fa-sign-in-alt"></i>
-                        Iniciar Sesión
-                    </a>
-                    <a href="register.html" class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i>
-                        Registrarse
-                    </a>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
                 </div>
-                <!-- Estado cuando SÍ está logueado -->
-                <div class="user-menu" id="userMenu" style="display: none;">
-                    <div class="user-dropdown">
-                        <button class="user-btn">
-                            <i class="fas fa-user"></i>
-                            <span id="userName">Usuario</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a href="perfil.html" class="dropdown-item">
-                                <i class="fas fa-user-edit"></i> Mi Perfil
-                            </a>
-                            <a href="citas.html" class="dropdown-item">
-                                <i class="fas fa-calendar-alt"></i> Mis Citas
-                            </a>
-                            <a href="pedidos.html" class="dropdown-item">
-                                <i class="fas fa-shopping-bag"></i> Mis Pedidos
-                            </a>
-                            <div class="dropdown-item" id="adminLink" style="display: none;">
-                                <i class="fas fa-cog"></i> Administración
-                            </div>
-                            <hr>
-                            <button class="dropdown-item text-danger" onclick="app.logout()">
-                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                <span>Huellitas & Burbujas</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                
+                <!-- Área de Autenticación -->
+                <li class="nav-auth" id="navAuth">
+                    <!-- Estado cuando NO está logueado -->
+                    <div class="auth-buttons" id="authButtons">
+                        <a href="login.html" class="btn btn-outline">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Iniciar Sesión
+                        </a>
+                        <a href="register.html" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            Registrarse
+                        </a>
+                    </div>
+                    
+                    <!-- Estado cuando SÍ está logueado -->
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <div class="user-dropdown">
+                            <button class="user-btn">
+                                <i class="fas fa-user"></i>
+                                <span id="userName">Usuario</span>
+                                <i class="fas fa-chevron-down"></i>
                             </button>
+                            <div class="dropdown-menu">
+                                <a href="perfil.html" class="dropdown-item">
+                                    <i class="fas fa-user-edit"></i> Mi Perfil
+                                </a>
+                                <a href="citas.html" class="dropdown-item">
+                                    <i class="fas fa-calendar-alt"></i> Mis Citas
+                                </a>
+                                <a href="pedidos.html" class="dropdown-item">
+                                    <i class="fas fa-shopping-bag"></i> Mis Pedidos
+                                </a>
+                                <div class="dropdown-item" id="adminLink" style="display: none;">
+                                    <i class="fas fa-cog"></i> Administración
+                                </div>
+                                <hr>
+                                <button class="dropdown-item text-danger" onclick="app.logout()">
+                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
-</header>
+                </li>
+                
+                <!-- Icono del Carrito -->
+                <li class="cart-icon">
+                    <a href="tienda.html" class="cart-link" id="cartLink">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Menú Hamburguesa para Mobile -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-content">
