@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Virtual - Huellitas & Burbujas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/tienda.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <span>Huellitas & Burbujas</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="tienda.html" class="active">Tienda</a></li>
+                <li><a href="index.html#testimonios">Testimonios</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+                <li class="nav-auth" id="navAuth">
+                    <!-- El contenido se carga dinámicamente con JS -->
+                </li>
+                <li class="cart-icon">
+                    <a href="#" class="cart-link" id="cartLink">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section de Tienda -->
+    <section class="shop-hero">
+        <div class="container">
+            <div class="shop-hero-content">
+                <h1>Tienda Virtual</h1>
+                <p>Todo lo que necesitas para el bienestar de tu mascota en un solo lugar</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Productos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Calidad Garantizada</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24h</span>
+                        <span class="stat-label">Envío Express</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtros y Búsqueda -->
+    <section class="shop-filters">
+        <div class="container">
+            <div class="filters-container">
+                <!-- Barra de Búsqueda -->
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar productos...">
+                    <button class="btn btn-primary" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <!-- Filtros Principales -->
+                <div class="filters-grid">
+                    <!-- Filtro por Categoría -->
+                    <div class="filter-group">
+                        <label for="categoryFilter">Categoría</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="all">Todas las categorías</option>
+                            <option value="alimentos">Alimentos</option>
+                            <option value="juguetes">Juguetes</option>
+                            <option value="medicamentos">Medicamentos</option>
+                            <option value="accesorios">Accesorios</option>
+                            <option value="cuidado">Cuidado e Higiene</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Especie -->
+                    <div class="filter-group">
+                        <label for="speciesFilter">Especie</label>
+                        <select id="speciesFilter" class="filter-select">
+                            <option value="all">Todas las especies</option>
+                            <option value="perro">Perros</option>
+                            <option value="gato">Gatos</option>
+                            <option value="ave">Aves</option>
+                            <option value="roedor">Roedores</option>
+                            <option value="otro">Otros</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Edad -->
+                    <div class="filter-group">
+                        <label for="ageFilter">Edad</label>
+                        <select id="ageFilter" class="filter-select">
+                            <option value="all">Todas las edades</option>
+                            <option value="cachorro">Cachorro</option>
+                            <option value="adulto">Adulto</option>
+                            <option value="senior">Senior</option>
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Precio -->
+                    <div class="filter-group">
+                        <label for="priceFilter">Precio</label>
+                        <select id="priceFilter" class="filter-select">
+                            <option value="all">Todos los precios</option>
+                            <option value="0-25000">$0 - $25.000</option>
+                            <option value="25000-50000">$25.000 - $50.000</option>
+                            <option value="50000-100000">$50.000 - $100.000</option>
+                            <option value="100000+">Más de $100.000</option>
+                        </select>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="filter-actions">
+                        <button class="btn btn-outline" id="resetFilters">
+                            <i class="fas fa-undo"></i>
+                            Limpiar
+                        </button>
+                        <button class="btn btn-primary" id="applyFilters">
+                            <i class="fas fa-filter"></i>
+                            Aplicar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtros Avanzados (Acordeón) -->
+                <div class="advanced-filters">
+                    <button class="advanced-toggle" id="advancedToggle">
+                        <i class="fas fa-sliders-h"></i>
+                        Filtros Avanzados
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="advanced-content" id="advancedContent">
+                        <div class="advanced-grid">
+                            <!-- Filtro por Marca -->
+                            <div class="filter-group">
+                                <label for="brandFilter">Marca</label>
+                                <select id="brandFilter" class="filter-select">
+                                    <option value="all">Todas las marcas</option>
+                                    <option value="royal-canin">Royal Canin</option>
+                                    <option value="purina">Purina</option>
+                                    <option value="hills">Hill's Science Diet</option>
+                                    <option value="eukanuba">Eukanuba</option>
+                                    <option value="nutre">Nutre</option>
+                                </select>
+                            </div>
+
+                            <!-- Filtro por Tamaño -->
+                            <div class="filter-group">
+                                <label for="sizeFilter">Tamaño de Mascota</label>
+                                <select id="sizeFilter" class="filter-select">
+                                    <option value="all">Todos los tamaños</option>
+                                    <option value="pequeno">Pequeño (1-10kg)</option>
+                                    <option value="mediano">Mediano (11-25kg)</option>
+                                    <option value="grande">Grande (26-45kg)</option>
+                                    <option value="gigante">Gigante (+45kg)</option>
+                                </select>
+                            </div>
+
+                            <!-- Filtro por Ingredientes Especiales -->
+                            <div class="filter-group">
+                                <label for="ingredientFilter">Ingredientes Especiales</label>
+                                <select id="ingredientFilter" class="filter-select">
+                                    <option value="all">Todos</option>
+                                    <option value="grain-free">Sin Granos</option>
+                                    <option value="hypoallergenic">Hipoalergénico</option>
+                                    <option value="natural">Natural</option>
+                                    <option value="organic">Orgánico</option>
+                                </select>
+                            </div>
+
+                            <!-- Filtro por Disponibilidad -->
+                            <div class="filter-group">
+                                <label for="stockFilter">Disponibilidad</label>
+                                <select id="stockFilter" class="filter-select">
+                                    <option value="all">Todos</option>
+                                    <option value="in-stock">En Stock</option>
+                                    <option value="low-stock">Poco Stock</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Productos -->
+    <section class="products-section">
+        <div class="container">
+            <!-- Header de Productos -->
+            <div class="products-header">
+                <h2 id="productsTitle">Todos los Productos</h2>
+                <div class="products-controls">
+                    <div class="sort-controls">
+                        <label for="sortSelect">Ordenar por:</label>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="name-asc">Nombre (A-Z)</option>
+                            <option value="name-desc">Nombre (Z-A)</option>
+                            <option value="price-asc">Precio (Menor a Mayor)</option>
+                            <option value="price-desc">Precio (Mayor a Menor)</option>
+                            <option value="popularity">Popularidad</option>
+                            <option value="newest">Más Nuevos</option>
+                        </select>
+                    </div>
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contador de Resultados -->
+            <div class="results-info">
+                <span id="resultsCount">Cargando productos...</span>
+            </div>
+
+            <!-- Grid de Productos -->
+            <div class="products-container">
+                <div class="products-grid" id="productsGrid">
+                    <!-- Los productos se cargan dinámicamente -->
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="spinner"></div>
+                    <p>Cargando productos...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No se encontraron productos</h3>
+                    <p>Intenta con otros filtros o términos de búsqueda</p>
+                    <button class="btn btn-primary" id="resetSearch">
+                        <i class="fas fa-undo"></i>
+                        Mostrar Todos los Productos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <button class="pagination-btn" id="prevPage">
+                    <i class="fas fa-chevron-left"></i>
+                    Anterior
+                </button>
+                <div class="pagination-numbers" id="paginationNumbers"></div>
+                <button class="pagination-btn" id="nextPage">
+                    Siguiente
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Categorías Destacadas -->
+    <section class="featured-categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Categorías Destacadas</h2>
+                <p>Encuentra lo mejor para cada tipo de mascota</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" data-category="alimentos" data-species="perro">
+                    <div class="category-icon">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <h3>Alimentos para Perros</h3>
+                    <p>Comida balanceada para todas las razas y edades</p>
+                    <span class="category-count">150 productos</span>
+                </div>
+                <div class="category-card" data-category="alimentos" data-species="gato">
+                    <div class="category-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>Alimentos para Gatos</h3>
+                    <p>Nutrición especializada para felinos</p>
+                    <span class="category-count">120 productos</span>
+                </div>
+                <div class="category-card" data-category="juguetes">
+                    <div class="category-icon">
+                        <i class="fas fa-baseball-ball"></i>
+                    </div>
+                    <h3>Juguetes</h3>
+                    <p>Diversión y entretenimiento para tu mascota</p>
+                    <span class="category-count">80 productos</span>
+                </div>
+                <div class="category-card" data-category="accesorios">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Accesorios</h3>
+                    <p>Collares, correas, camas y más</p>
+                    <span class="category-count">95 productos</span>
+                </div>
+                <div class="category-card" data-category="medicamentos">
+                    <div class="category-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>Salud y Bienestar</h3>
+                    <p>Medicamentos y productos de cuidado</p>
+                    <span class="category-count">65 productos</span>
+                </div>
+                <div class="category-card" data-category="cuidado">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Cuidado e Higiene</h3>
+                    <p>Shampoo, cepillos y productos de limpieza</p>
+                    <span class="category-count">45 productos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Ofertas Especiales -->
+    <section class="special-offers">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ofertas Especiales</h2>
+                <p>Aprovecha nuestros descuentos y promociones</p>
+            </div>
+            <div class="offers-grid" id="offersGrid">
+                <!-- Las ofertas se cargan dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <h3>Huellitas & Burbujas</h3>
+                    </div>
+                    <p>Tu spa de confianza para el cuidado y bienestar de tu mascota.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#servicios">Servicios</a></li>
+                        <li><a href="tienda.html">Tienda</a></li>
+                        <li><a href="index.html#testimonios">Testimonios</a></li>
+                        <li><a href="index.html#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorías</h4>
+                    <ul>
+                        <li><a href="#" data-filter="alimentos">Alimentos</a></li>
+                        <li><a href="#" data-filter="juguetes">Juguetes</a></li>
+                        <li><a href="#" data-filter="medicamentos">Medicamentos</a></li>
+                        <li><a href="#" data-filter="accesorios">Accesorios</a></li>
+                        <li><a href="#" data-filter="cuidado">Cuidado e Higiene</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Bogotá</p>
+                        <p><i class="fas fa-phone"></i> +57 300 123 4567</p>
+                        <p><i class="fas fa-envelope"></i> info@huellitasburbujas.com</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 8:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Huellitas & Burbujas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content product-modal-content">
+            <div class="modal-header">
+                <h2 id="productModalTitle">Detalles del Producto</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="product-modal-body" id="productModalBody">
+                <!-- Contenido del modal se carga dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-modal-content">
+            <div class="modal-header">
+                <h2>Tu Carrito de Compras</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="cart-modal-body" id="cartModalBody">
+                <!-- Contenido del carrito se carga dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/tienda.js"></script>
+</body>
+</html>
