@@ -434,11 +434,220 @@
             </div>
         </div>
     </div>
+    <!-- Agregar estos modales al final de tienda.html, antes de los scripts -->
+
+<!-- Modal de Métodos de Pago -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content payment-modal">
+        <div class="modal-header">
+            <h2>Completar Compra</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="payment-process">
+            <!-- Paso 1: Resumen -->
+            <div class="payment-step active" data-step="1">
+                <div class="order-summary">
+                    <h3>Resumen de tu Pedido</h3>
+                    <div class="order-items" id="orderItems">
+                        <!-- Los productos se cargan dinámicamente -->
+                    </div>
+                    <div class="order-totals">
+                        <div class="total-line">
+                            <span>Subtotal:</span>
+                            <span id="paymentSubtotal">$0</span>
+                        </div>
+                        <div class="total-line">
+                            <span>Envío:</span>
+                            <span id="paymentShipping">$0</span>
+                        </div>
+                        <div class="total-line total">
+                            <span>Total:</span>
+                            <span id="paymentTotal">$0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-actions">
+                    <button class="btn btn-primary" onclick="paymentSystem.nextStep()">
+                        Continuar al Pago
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Método de Pago -->
+            <div class="payment-step" data-step="2">
+                <h3>Selecciona Método de Pago</h3>
+                <div class="payment-methods">
+                    <div class="payment-method" data-method="card">
+                        <div class="method-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="method-info">
+                            <h4>Tarjeta de Crédito/Débito</h4>
+                            <p>Pago seguro con tarjeta</p>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+
+                    <div class="payment-method" data-method="qr">
+                        <div class="method-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="method-info">
+                            <h4>Pago con QR</h4>
+                            <p>Escanea y paga desde tu app bancaria</p>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+
+                    <div class="payment-method" data-method="cash">
+                        <div class="method-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="method-info">
+                            <h4>Efectivo</h4>
+                            <p>Paga al momento de la entrega</p>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="payment-actions">
+                    <button class="btn btn-outline" onclick="paymentSystem.previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 3: Pago con Tarjeta -->
+            <div class="payment-step" data-step="3">
+                <h3>Pago con Tarjeta</h3>
+                <form class="card-form" id="cardForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Número de Tarjeta</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-credit-card"></i>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Fecha de Expiración</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCVC">CVC</label>
+                            <input type="text" id="cardCVC" placeholder="123" maxlength="3">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Nombre en la Tarjeta</label>
+                        <input type="text" id="cardName" placeholder="JUAN PEREZ">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="paymentSystem.previousStep()">
+                            <i class="fas fa-arrow-left"></i>
+                            Volver
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-lock"></i>
+                            Pagar $<span id="cardTotal">0</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Paso 4: Pago con QR -->
+            <div class="payment-step" data-step="4">
+                <h3>Pago con QR</h3>
+                <div class="qr-payment">
+                    <div class="qr-container">
+                        <div id="qrcode"></div>
+                    </div>
+                    <div class="qr-instructions">
+                        <h4>Instrucciones:</h4>
+                        <ol>
+                            <li>Abre la app de tu banco</li>
+                            <li>Selecciona "Pagar con QR"</li>
+                            <li>Escanea este código</li>
+                            <li>Confirma el pago</li>
+                        </ol>
+                        <div class="qr-amount">
+                            <strong>Monto a pagar:</strong>
+                            <span id="qrAmount">$0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-actions">
+                    <button class="btn btn-outline" onclick="paymentSystem.previousStep()">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver
+                    </button>
+                    <button class="btn btn-success" onclick="paymentSystem.simulateQRPayment()">
+                        <i class="fas fa-check"></i>
+                        Simular Pago Completado
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 5: Confirmación -->
+            <div class="payment-step" data-step="5">
+                <div class="payment-success">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>¡Pago Completado!</h3>
+                    <p>Tu pedido ha sido procesado exitosamente</p>
+                    
+                    <div class="order-details">
+                        <div class="detail-item">
+                            <strong>Número de Orden:</strong>
+                            <span id="orderNumber">HB-001</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Fecha:</strong>
+                            <span id="orderDate">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Método de Pago:</strong>
+                            <span id="orderPaymentMethod">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Total Pagado:</strong>
+                            <span id="orderTotalPaid">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="success-actions">
+                        <button class="btn btn-outline" onclick="paymentSystem.downloadInvoice()">
+                            <i class="fas fa-download"></i>
+                            Descargar Factura
+                        </button>
+                        <button class="btn btn-primary" onclick="paymentSystem.finishPayment()">
+                            <i class="fas fa-shopping-bag"></i>
+                            Seguir Comprando
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <!-- Scripts -->
     <script src="js/app.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/shop.js"></script>
     <script src="js/tienda.js"></script>
+    <!-- Scripts adicionales -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/payments.js"></script>
+    <script src="js/pdf-generator.js"></script>
 </body>
 </html>

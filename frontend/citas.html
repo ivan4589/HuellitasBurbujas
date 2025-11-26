@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar Cita - Huellitas & Burbujas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/citas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <span>Huellitas & Burbujas</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="citas.html" class="active">Reservar Cita</a></li>
+                <li><a href="index.html#testimonios">Testimonios</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+                <li class="nav-auth" id="navAuth">
+                    <!-- El contenido se carga dinámicamente con JS -->
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section de Citas -->
+    <section class="booking-hero">
+        <div class="container">
+            <div class="booking-hero-content">
+                <h1>Reserva tu Cita</h1>
+                <p>Agenda los mejores servicios de spa y cuidado para tu mascota</p>
+                <div class="booking-stats">
+                    <div class="stat">
+                        <span class="stat-number">4.9</span>
+                        <span class="stat-label">Calificación</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2,000+</span>
+                        <span class="stat-label">Citas Realizadas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15min</span>
+                        <span class="stat-label">Confirmación Rápida</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso de Reserva -->
+    <section class="booking-process">
+        <div class="container">
+            <!-- Progress Steps -->
+            <div class="booking-progress">
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <span class="step-label">Servicio</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <span class="step-label">Fecha y Hora</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <span class="step-label">Mascota</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-number">4</div>
+                        <span class="step-label">Confirmación</span>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="bookingProgressFill" style="width: 25%"></div>
+                </div>
+            </div>
+
+            <!-- Formulario de Reserva -->
+            <form class="booking-form" id="bookingForm">
+                <!-- Paso 1: Selección de Servicio -->
+                <div class="booking-step active" data-step="1">
+                    <div class="step-header">
+                        <h2>Selecciona un Servicio</h2>
+                        <p>Elige el servicio perfecto para tu mascota</p>
+                    </div>
+
+                    <div class="services-grid" id="servicesGrid">
+                        <!-- Los servicios se cargan dinámicamente -->
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn btn-primary" onclick="bookingSystem.nextStep()">
+                            Siguiente
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paso 2: Fecha y Hora -->
+                <div class="booking-step" data-step="2">
+                    <div class="step-header">
+                        <h2>Selecciona Fecha y Hora</h2>
+                        <p>Elige un horario disponible para tu cita</p>
+                    </div>
+
+                    <div class="datetime-selection">
+                        <div class="calendar-section">
+                            <h3>Selecciona una Fecha</h3>
+                            <div class="calendar-nav">
+                                <button type="button" class="btn btn-outline" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h4 id="currentMonth">Febrero 2024</h4>
+                                <button type="button" class="btn btn-outline" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="calendar" id="calendar">
+                                <!-- El calendario se genera dinámicamente -->
+                            </div>
+                        </div>
+
+                        <div class="time-section">
+                            <h3>Horarios Disponibles</h3>
+                            <div class="time-slots" id="timeSlots">
+                                <div class="time-empty">
+                                    <i class="fas fa-calendar-day"></i>
+                                    <p>Selecciona una fecha para ver los horarios disponibles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn btn-outline" onclick="bookingSystem.previousStep()">
+                            <i class="fas fa-arrow-left"></i>
+                            Anterior
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="bookingSystem.nextStep()">
+                            Siguiente
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paso 3: Información de la Mascota -->
+                <div class="booking-step" data-step="3">
+                    <div class="step-header">
+                        <h2>Información de la Mascota</h2>
+                        <p>Completa los datos de tu mascota para la cita</p>
+                    </div>
+
+                    <div class="pet-selection">
+                        <div class="pets-list" id="bookingPetsList">
+                            <!-- Las mascotas se cargan dinámicamente -->
+                        </div>
+
+                        <button type="button" class="btn btn-outline btn-block" onclick="bookingSystem.openPetModal()">
+                            <i class="fas fa-plus"></i>
+                            Agregar Nueva Mascota
+                        </button>
+
+                        <div class="additional-info">
+                            <h3>Información Adicional</h3>
+                            <div class="form-group">
+                                <label for="observations">Observaciones o Comentarios</label>
+                                <textarea 
+                                    id="observations" 
+                                    rows="4" 
+                                    placeholder="Información adicional sobre tu mascota, necesidades especiales, comportamientos, etc."
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-actions">
+                        <button type="button" class="btn btn-outline" onclick="bookingSystem.previousStep()">
+                            <i class="fas fa-arrow-left"></i>
+                            Anterior
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="bookingSystem.nextStep()">
+                            Siguiente
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paso 4: Confirmación -->
+                <div class="booking-step" data-step="4">
+                    <div class="step-header">
+                        <h2>Confirma tu Cita</h2>
+                        <p>Revisa los detalles antes de confirmar</p>
+                    </div>
+
+                    <div class="confirmation-details">
+                        <div class="confirmation-card">
+                            <div class="confirmation-section">
+                                <h3>Detalles del Servicio</h3>
+                                <div class="detail-item">
+                                    <strong>Servicio:</strong>
+                                    <span id="confirmService">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Duración:</strong>
+                                    <span id="confirmDuration">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Precio:</strong>
+                                    <span id="confirmPrice">-</span>
+                                </div>
+                            </div>
+
+                            <div class="confirmation-section">
+                                <h3>Fecha y Hora</h3>
+                                <div class="detail-item">
+                                    <strong>Fecha:</strong>
+                                    <span id="confirmDate">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Hora:</strong>
+                                    <span id="confirmTime">-</span>
+                                </div>
+                            </div>
+
+                            <div class="confirmation-section">
+                                <h3>Mascota</h3>
+                                <div class="detail-item">
+                                    <strong>Nombre:</strong>
+                                    <span id="confirmPet">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Especie:</strong>
+                                    <span id="confirmSpecies">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <strong>Observaciones:</strong>
+                                    <span id="confirmObservations">-</span>
+                                </div>
+                            </div>
+
+                            <div class="confirmation-total">
+                                <div class="total-line">
+                                    <span>Subtotal:</span>
+                                    <span id="confirmSubtotal">$0</span>
+                                </div>
+                                <div class="total-line">
+                                    <span>Total a Pagar:</span>
+                                    <span class="total-amount" id="confirmTotal">$0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="confirmation-actions">
+                        <button type="button" class="btn btn-outline" onclick="bookingSystem.previousStep()">
+                            <i class="fas fa-arrow-left"></i>
+                            Anterior
+                        </button>
+                        <button type="submit" class="btn btn-success btn-large">
+                            <i class="fas fa-calendar-check"></i>
+                            Confirmar Cita
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios Adicionales -->
+    <section class="additional-services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Servicios Adicionales</h2>
+                <p>Complementa la experiencia de tu mascota</p>
+            </div>
+            <div class="addons-grid">
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-teeth"></i>
+                    </div>
+                    <h3>Limpieza Dental</h3>
+                    <p>Cuidado dental profesional para tu mascota</p>
+                    <span class="addon-price">+ $15.000</span>
+                    <button class="btn btn-outline addon-btn" data-addon="limpieza-dental">
+                        Agregar
+                    </button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Masaje Relajante</h3>
+                    <p>Masaje terapéutico para relajar a tu mascota</p>
+                    <span class="addon-price">+ $20.000</span>
+                    <button class="btn btn-outline addon-btn" data-addon="masaje">
+                        Agregar
+                    </button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3>Pedicure</h3>
+                    <p>Corte y limado profesional de uñas</p>
+                    <span class="addon-price">+ $10.000</span>
+                    <button class="btn btn-outline addon-btn" data-addon="pedicure">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información Importante -->
+    <section class="booking-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Horarios de Atención</h3>
+                    <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                    <p>Sábados: 9:00 AM - 2:00 PM</p>
+                    <p>Domingos: Cerrado</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                    <h3>Política de Cancelación</h3>
+                    <p>Puedes cancelar o reprogramar tu cita hasta 24 horas antes sin costo adicional.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-dog"></i>
+                    </div>
+                    <h3>Requisitos</h3>
+                    <p>Tu mascota debe tener su esquema de vacunación al día y estar en buen estado de salud.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <h3>Huellitas & Burbujas</h3>
+                    </div>
+                    <p>Tu spa de confianza para el cuidado y bienestar de tu mascota.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#servicios">Servicios</a></li>
+                        <li><a href="tienda.html">Tienda</a></li>
+                        <li><a href="citas.html">Reservar Cita</a></li>
+                        <li><a href="index.html#testimonios">Testimonios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="citas.html">Baño Premium</a></li>
+                        <li><a href="citas.html">Corte de Pelo</a></li>
+                        <li><a href="citas.html">Limpieza de Oídos</a></li>
+                        <li><a href="citas.html">Consulta Veterinaria</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Bogotá</p>
+                        <p><i class="fas fa-phone"></i> +57 300 123 4567</p>
+                        <p><i class="fas fa-envelope"></i> info@huellitasburbujas.com</p>
+                        <p><i class="fas fa-clock"></i> Lun-Vie: 8:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Huellitas & Burbujas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para Agregar Mascota -->
+    <div id="petModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="petModalTitle">Agregar Mascota</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="petForm">
+                <input type="hidden" id="petIndex" value="">
+                
+                <div class="form-group">
+                    <label for="petName">Nombre de la Mascota *</label>
+                    <input type="text" id="petName" required placeholder="Ej: Max, Luna">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="petSpecies">Especie *</label>
+                        <select id="petSpecies" required>
+                            <option value="">Seleccionar</option>
+                            <option value="perro">Perro</option>
+                            <option value="gato">Gato</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="petBreed">Raza</label>
+                        <input type="text" id="petBreed" placeholder="Ej: Labrador, Siamés">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="petAge">Edad (años)</label>
+                        <input type="number" id="petAge" min="0" max="30" placeholder="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="petWeight">Peso (kg)</label>
+                        <input type="number" id="petWeight" min="0" step="0.1" placeholder="5.5">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="petObservations">Observaciones</label>
+                    <textarea id="petObservations" rows="3" placeholder="Información adicional sobre tu mascota..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="bookingSystem.closePetModal()">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Guardar Mascota
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación Exitosa -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡Cita Confirmada!</h2>
+            <p>Tu cita ha sido agendada exitosamente. Te hemos enviado un correo de confirmación.</p>
+            
+            <div class="success-details">
+                <div class="detail-item">
+                    <strong>Número de Cita:</strong>
+                    <span id="successBookingId">HB-001</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Fecha:</strong>
+                    <span id="successDate">-</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Hora:</strong>
+                    <span id="successTime">-</span>
+                </div>
+            </div>
+
+            <div class="success-actions">
+                <button class="btn btn-outline" onclick="bookingSystem.closeSuccessModal()">
+                    <i class="fas fa-calendar"></i>
+                    Agendar Otra Cita
+                </button>
+                <a href="mis-citas.html" class="btn btn-primary">
+                    <i class="fas fa-list"></i>
+                    Ver Mis Citas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bookings.js"></script>
+</body>
+</html>

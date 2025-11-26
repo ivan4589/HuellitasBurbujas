@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - Huellitas & Burbujas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/citas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <span>Huellitas & Burbujas</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="tienda.html">Tienda</a></li>
+                <li><a href="citas.html">Reservar Cita</a></li>
+                <li><a href="mis-citas.html" class="active">Mis Citas</a></li>
+                <li class="nav-auth" id="navAuth">
+                    <!-- El contenido se carga dinámicamente con JS -->
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="my-bookings-hero">
+        <div class="container">
+            <h1>Mis Citas</h1>
+            <p>Gestiona y revisa todas tus reservas</p>
+        </div>
+    </section>
+
+    <section class="bookings-content">
+        <div class="container">
+            <div class="bookings-filters">
+                <div class="filter-group">
+                    <label for="statusFilter">Filtrar por estado:</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="all">Todas las citas</option>
+                        <option value="confirmada">Confirmadas</option>
+                        <option value="pendiente">Pendientes</option>
+                        <option value="completada">Completadas</option>
+                        <option value="cancelada">Canceladas</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="myBookings.loadBookings()">
+                    <i class="fas fa-sync-alt"></i>
+                    Actualizar
+                </button>
+            </div>
+
+            <div class="bookings-list" id="bookingsList">
+                <!-- Las citas se cargan dinámicamente -->
+            </div>
+
+            <div class="empty-bookings" id="emptyBookings" style="display: none;">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No tienes citas agendadas</h3>
+                <p>¡Agenda tu primera cita para consentir a tu mascota!</p>
+                <a href="citas.html" class="btn btn-primary">
+                    <i class="fas fa-calendar-plus"></i>
+                    Reservar Mi Primera Cita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/my-bookings.js"></script>
+</body>
+</html>
